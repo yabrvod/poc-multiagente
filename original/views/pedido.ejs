@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Detalle del pedido · Pedidos</title><link rel="stylesheet" href="/estilos.css"></head>
+<body>
+<%- include('_cabecera') %>
+<main>
+  <% if (!p) { %>
+    <h1>Pedido no encontrado</h1>
+    <p class="error">El pedido que buscas no existe.</p>
+  <% } else { %>
+    <h1>Pedido N° <%= p.numero %></h1>
+    <p>Fecha: <%= fecha(p.fecha) %> · Estado: <strong><%= p.estado %></strong> · Cliente: <%= p.cliente %></p>
+    <table>
+      <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Subtotal</th></tr></thead>
+      <tbody>
+      <% p.lineas.forEach(l => { %>
+        <tr><td><%= l.producto %></td><td><%= l.cantidad %></td>
+            <td><%= pesos(l.precioUnitario) %></td>
+            <td><%= pesos(l.subtotal) %></td></tr>
+      <% }) %>
+      </tbody>
+    </table>
+    <p><strong>Total: <%= pesos(p.total) %></strong></p>
+  <% } %>
+  <p><a href="/pedidos">Volver a mis pedidos</a></p>
+</main>
+</body>
+</html>

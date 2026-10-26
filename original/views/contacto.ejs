@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Contacto · Pedidos</title><link rel="stylesheet" href="/estilos.css"></head>
+<body>
+<%- include('_cabecera') %>
+<main>
+  <h1>Contacto</h1>
+  <% if (enviado) { %>
+    <p class="ok">Mensaje enviado. Te responderemos a la brevedad.</p>
+  <% } else { %>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form method="post">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" name="nombre">
+      <label for="correo">Correo</label>
+      <input id="correo" name="correo" type="text">
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" rows="5" cols="50"></textarea>
+      <div><button type="submit">Enviar</button></div>
+    </form>
+  <% } %>
+</main>
+</body>
+</html>

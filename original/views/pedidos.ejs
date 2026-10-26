@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Mis pedidos · Pedidos</title><link rel="stylesheet" href="/estilos.css"></head>
+<body>
+<%- include('_cabecera') %>
+<main>
+  <h1>Mis pedidos</h1>
+  <form method="get" class="filtros">
+    <div>
+      <label for="estado">Estado</label>
+      <select id="estado" name="estado">
+        <option value="">Todos</option>
+        <% ESTADOS.forEach(e => { %>
+          <option value="<%= e %>" <%= e === estado ? 'selected' : '' %>><%= e %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div>
+      <label for="numero">Número</label>
+      <input id="numero" name="numero" value="<%= numero %>" inputmode="numeric">
+    </div>
+    <div><button type="submit">Filtrar</button></div>
+  </form>
+
+  <% if (lista.length === 0) { %>
+    <p class="vacio">No hay pedidos que coincidan con el filtro.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Número</th><th>Fecha</th><th>Estado</th><th>Total</th></tr></thead>
+      <tbody>
+      <% lista.forEach(p => { %>
+        <tr>
+          <td><a href="/pedido?numero=<%= p.numero %>"><%= p.numero %></a></td>
+          <td><%= fecha(p.fecha) %></td>
+          <td><%= p.estado %></td>
+          <td><%= pesos(p.total) %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</main>
+</body>
+</html>

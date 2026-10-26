@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Ingresar · Pedidos</title><link rel="stylesheet" href="/estilos.css"></head>
+<body>
+<%- include('_cabecera') %>
+<main>
+  <h1>Ingresar</h1>
+  <% if (expirada) { %><p class="error">Tu sesión expiró. Vuelve a ingresar.</p><% } %>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form method="post">
+    <label for="usuario">Usuario</label>
+    <input id="usuario" name="usuario" autocomplete="username">
+    <label for="clave">Clave</label>
+    <input id="clave" name="clave" type="password" autocomplete="current-password">
+    <div><button type="submit">Ingresar</button></div>
+  </form>
+</main>
+</body>
+</html>
